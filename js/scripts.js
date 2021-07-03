@@ -1,10 +1,10 @@
-$(function() {
-    setInterval(function() {
-        let colors = ["pink", "orange", "purple", "yellow", "blue", "red", "green", "cyan", "indigo", "white"];
-        let index = Math.floor((Math.random() * colors.length) + 0);
-        $('#theme-color').attr("href", "css/" + colors[index] + ".css");
-    }, 5000);
-});
+// $(function() {
+//     setInterval(function() {
+//         let colors = ["orange", "purple", "yellow", "blue", "red", "green", "cyan"];
+//         let index = Math.floor((Math.random() * colors.length) + 0);
+//         $('#theme-color').attr("href", "css/" + colors[index] + ".css");
+//     }, 5000);
+// });
 
 $(function () {
 
@@ -72,18 +72,5 @@ $(function () {
         $([document.documentElement, document.body]).animate({
             scrollTop: $("#learn-more-element").offset().top
         }, 2000);
-    });
-
-    /**Theme switcher - DEMO PURPOSE ONLY */
-    $('.switcher-trigger').click(function () {
-        $('.switcher-wrap').toggleClass('active');
-    });
-
-    // TODO: incomplete - call this with random colors everytime the site is loaded
-    $('.color-switcher ul li').click(function () {
-        var color = $(this).attr('data-color');
-        $('#theme-color').attr("href", "css/" + color + ".css");
-        $('.color-switcher ul li').removeClass('active');
-        $(this).addClass('active');
     });
 });
