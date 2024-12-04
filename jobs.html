@@ -1,10 +1,25 @@
 <html>
-<body>
-</body>
-<pre>
+  <head>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("text-container");
+        const urlPattern =
+          /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+        const textWithLinks = container.innerHTML.replace(
+          urlPattern,
+          '<a href="$1" target="_blank">$1</a>'
+        );
+        container.innerHTML = textWithLinks;
+      });
+    </script>
+  </head>
+  <body>
+    <div id="text-container">
+      <pre>
 <h1>The complete list of all the open positions at Palo Alto Networks in Tel-Aviv.</h1>
-December 2024 edition.
+<h3>December 2024 edition.
 92 positions.
+</h3>
 
 All the open positions are located in the Alon towers in Tel-Aviv.
 Hybrid, at max 3 days from office.
@@ -120,7 +135,7 @@ Other:
   2. Support Enablement and Escalations Engineer (Prisma Cloud): https://smrtr.io/pfy8m
 
 
-
 </pre>
-</body>
+    </div>
+  </body>
 </html>
