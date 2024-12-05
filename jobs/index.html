@@ -1,366 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <style>
-  body {
-    font-family: "Courier New", Courier, monospace;
-    background-color: #f0f0f5;
-    color: #333;
-    text-align: center;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  h1 {
-    font-family: "Impact", sans-serif;
-    font-size: 40px;
-  }
-  .title-container {
-    max-width: 700px;
-    margin: 40px auto;
-    text-align: center;
-  }
-  .info-container {
-    max-width: 600px;
-    margin: 40px auto;
-    margin-bottom: 80px;
-    text-align: left;
-    font-size: 14px;
-    border-width: 3px;
-    border-style: solid;
-    border-image: repeating-linear-gradient(
-      45deg,
-      black,
-      black 8px,
-      yellow 8px,
-      yellow 16px
-    ) 1;
-    border-radius: 20px;
-    padding: 20px;
-    background-color: white;
-    color: #333;
-  }
-  .toc-container {
-    max-width: 600px;
-    margin: 0px auto;
-    border: 2px solid yellow;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: left;
-    background-color: #fff8dc;
-    color: #333;
-  }
-  .toc-link {
-    cursor: pointer;
-    color: #007acc;
-    text-decoration: none;
-  }
-  .department-title {
-    font-family: "Impact", sans-serif;
-    font-size: 26px;
-    margin-top: 40px;
-    margin-bottom: 5px;
-  }
-  .card-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px auto 0;
-    flex: 1;
-  }
-  .job-card {
-    background-color: #fffdfa;
-    border: 2px solid #333;
-    border-radius: 8px;
-    box-shadow: 4px 4px 0px #b0b1ba;
-    margin: 10px;
-    padding: 15px;
-    width: 90%;
-    max-width: 600px;
-    transition: transform 0.2s;
-    cursor: pointer;
-    position: relative;
-    color: #333;
-  }
-  .job-card:hover {
-    transform: translateY(-6px);
-  }
-  .job-title {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  .job-link {
-    font-weight: bold;
-    color: #007acc;
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-  }
-  .clipboard-success {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: #4bb543;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: none;
-    font-size: 12px;
-    white-space: nowrap;
-  }
-  pre {
-    white-space: normal;
-    visibility: hidden;
-    display: none;
-  }
-  /* Light/Dark Mode Switch */
-  .theme-switch {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    z-index: 1000;
-  }
-  .theme-switch label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f0f0f5;
-    border: 2px solid #333;
-    border-radius: 15px;
-    width: 60px;
-    height: 30px;
-    position: relative;
-    transition: background-color 0.2s;
-  }
-  .theme-switch input {
-    display: none;
-  }
-  .theme-switch label::after {
-    content: "🌞";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 26px;
-    height: 26px;
-    background-color: #fff;
-    border-radius: 50%;
-    font-size: 18px;
-    transition: transform 0.2s, background-color 0.2s;
-  }
-  .theme-switch input:checked + label {
-    background-color: #007acc;
-  }
-  .theme-switch input:checked + label::after {
-    content: "🌜";
-    transform: translateX(30px);
-    background-color: #333;
-    color: #fff;
-  }
-  /* Dark Mode Styling */
-  body.dark-mode {
-    background-color: #333;
-    color: #f0f0f5;
-  }
-  body.dark-mode .info-container,
-  body.dark-mode .toc-container,
-  body.dark-mode .job-card {
-    background-color: #444;
-    color: #eee;
-    border-color: #aaa;
-  }
-  /* Footer styling */
-  footer {
-    margin-top: 60px;
-    width: 100%;
-    background-color: #007acc;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 20px;
-    font-family: "Courier New", Courier, monospace;
-    letter-spacing: 1px;
-  }
-  footer a,
-  footer a:visited {
-    color: white;
-    text-decoration: none;
-  }
-  /* Scroll to Top Button */
-  #scrollToTopButton {
-    display: none; /* Hidden by default */
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    width: 50px;
-    height: 50px;
-    background-color: #007acc;
-    color: white;
-    border-radius: 50%;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 24px;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: opacity 0.3s;
-  }
-  /* Hover effect */
-  #scrollToTopButton:hover {
-    background-color: #005f99;
-  }
- </style>
- <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggleSwitch = document.getElementById("theme-toggle");
-    const currentTheme =
-      localStorage.getItem("theme") ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light");
-    if (currentTheme === "dark") {
-      document.body.classList.add("dark-mode");
-      toggleSwitch.checked = true;
-    }
-    toggleSwitch.addEventListener("change", function () {
-      if (this.checked) {
-        document.body.classList.add("dark-mode");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.body.classList.remove("dark-mode");
-        localStorage.setItem("theme", "light");
-      }
-    });
-    const container = document.getElementById("text-container");
-    const textLines = container.textContent.split("\n");
-    const cardContainer = container.parentElement;
-    const tocList = document.getElementById("toc-list");
-    let currentDepartment = "";
-    let departmentCounts = {};
-    textLines.forEach((line) => {
-      line = line.trim();
-      if (line.endsWith(":") && !line.includes("http")) {
-        currentDepartment = line.replace(":", "");
-        const departmentID = currentDepartment.toLowerCase().replace(/\s+/g, "-");
-        const departmentDiv = document.createElement("div");
-        departmentDiv.className = "department-title";
-        departmentDiv.id = departmentID;
-        departmentDiv.textContent = currentDepartment;
-        cardContainer.appendChild(departmentDiv);
-        departmentCounts[currentDepartment] = 0;
-      } else {
-        const jobPattern = /^\d+\.\s(.+):\s(https?:\/\/\S+)$/;
-        const match = line.match(jobPattern);
-        if (match && currentDepartment) {
-          departmentCounts[currentDepartment]++;
-          const jobTitle = match[1].trim();
-          const jobLink = match[2].trim();
-          const jobCard = document.createElement("div");
-          jobCard.className = "job-card";
-          jobCard.onclick = () => window.open(jobLink, "_blank");
-          const titleDiv = document.createElement("div");
-          titleDiv.className = "job-title";
-          titleDiv.textContent = jobTitle;
-          const linkDiv = document.createElement("div");
-          linkDiv.className = "job-link";
-          linkDiv.textContent = "Copy Referral Link";
-          const successIndicator = document.createElement("div");
-          successIndicator.className = "clipboard-success";
-          successIndicator.textContent = "Copied!";
-          linkDiv.onclick = (event) => {
-            event.stopPropagation();
-            navigator.clipboard.writeText(jobLink).then(
-              () => {
-                successIndicator.style.display = "block";
-                setTimeout(() => {
-                  successIndicator.style.display = "none";
-                }, 2000);
-              },
-              () => {
-                alert("Failed to copy the link.");
-              }
-            );
-          };
-          linkDiv.appendChild(successIndicator);
-          jobCard.appendChild(titleDiv);
-          jobCard.appendChild(linkDiv);
-          cardContainer.appendChild(jobCard);
-        }
-      }
-    });
-    // Calculate total jobs
-    let totalJobs = 0;
-    Object.keys(departmentCounts).forEach((department) => {
-      totalJobs += departmentCounts[department];
-    });
-    // Update the total job count in the HTML
-    document.querySelector(
-      ".title-container h3"
-    ).textContent = `December 2024 edition: ${totalJobs} positions.`;
-    Object.keys(departmentCounts).forEach((department) => {
-      const departmentID = department.toLowerCase().replace(/\s+/g, "-");
-      const tocItem = document.createElement("li");
-      const tocLink = document.createElement("a");
-      tocLink.className = "toc-link";
-      tocLink.href = `#${departmentID}`;
-      tocLink.textContent = `${department} (${departmentCounts[department]})`;
-      tocItem.appendChild(tocLink);
-      tocList.appendChild(tocItem);
-    });
-
-    // Scroll to Top Button
-    const scrollToTopButton = document.getElementById("scrollToTopButton");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        scrollToTopButton.style.display = "flex";
-      } else {
-        scrollToTopButton.style.display = "none";
-      }
-    });
-
-    scrollToTopButton.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  });
-</script>
-</head>
-<body>
- <div class="theme-switch">
-   <input type="checkbox" id="theme-toggle" />
-   <label for="theme-toggle"></label>
- </div>
- <div class="title-container">
-   <h1>
-     The complete list of all open positions at Palo Alto Networks in Tel-Aviv
-   </h1>
-   <h3></h3>
- </div>
- <div class="info-container">
-   <p>
-     All open positions are located in the Alon towers in Tel-Aviv.<br />
-     Hybrid, at max 3 days from office.<br /><br />
-     Please apply directly with relevant referral links.<br />
-     Make sure to apply to all the desired positions.
-   </p>
- </div>
- <div class="toc-container">
-   <strong>Departments with open positions:</strong>
-   <ul id="toc-list"></ul>
- </div>
- <div class="card-container">
-   <pre id="text-container">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="theme-switch">
+      <input type="checkbox" id="theme-toggle" />
+      <label for="theme-toggle"></label>
+    </div>
+    <div class="title-container">
+      <h1>
+        The complete list of all open positions at Palo Alto Networks in
+        Tel-Aviv
+      </h1>
+      <h3></h3>
+    </div>
+    <div class="info-container">
+      <p>
+        All open positions are located in the Alon towers in Tel-Aviv.<br />
+        Hybrid, at max 3 days from office.<br /><br />
+        Please apply directly with relevant referral links.<br />
+        Make sure to apply to all the desired positions.
+      </p>
+    </div>
+    <div class="toc-container">
+      <strong>Departments with open positions:</strong>
+      <ul id="toc-list"></ul>
+    </div>
+    <div class="card-container">
+      <pre id="text-container">
     Engineering:
     1. Research infrastructure & Tools Developer (Cortex): https://smrtr.io/pfy4C
     2. Senior Engineer Software - Backend and Data (Cortex): https://smrtr.io/pfy4G
@@ -468,8 +139,8 @@
     1. Staff Security Services Engineer - Focused Services (FIREWALL): https://smrtr.io/pfy7n
     2. Support Enablement and Escalations Engineer (Prisma Cloud): https://smrtr.io/pfy8m
    </pre>
- </div>
- <button id="scrollToTopButton">⬆</button>
- <footer><a href="https://eliav.xyz" target="_blank">eliav.xyz</a></footer>
-</body>
+    </div>
+    <button id="scrollToTopButton">⬆</button>
+    <footer><a href="https://eliav.xyz" target="_blank">eliav.xyz</a></footer>
+  </body>
 </html>
