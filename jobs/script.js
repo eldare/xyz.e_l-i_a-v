@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Update the total job count in the HTML
   document.querySelector(
     ".title-container h3"
-  ).textContent = `December 2024 edition: ${totalJobs} positions.`;
+  ).textContent = `${totalJobs} open positions`;
   Object.keys(departmentCounts).forEach((department) => {
     const departmentID = department.toLowerCase().replace(/\s+/g, "-");
     const tocItem = document.createElement("li");
