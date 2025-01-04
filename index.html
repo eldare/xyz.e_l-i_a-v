@@ -33,30 +33,10 @@
 <body>
 
 <section class="py-7 py-md-0 bg-hero">
-    <video id="myVideo" playsinline autoplay loop>
-        <source src="background_with_music.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <script>
-        const video = document.getElementById('myVideo');
-
-        async function attemptAutoplay() {
-            try {
-            await video.play();
-        } catch (error) {
-            video.muted = true;
-            video.play();
-        }
-
-        // Call the function to attempt autoplay
-        attemptAutoplay();
-    </script>
-
-    <!-- <video playsinline autoplay loop>
+    <video playsinline autoplay loop>
         <source src="background.mp4" type="video/mp4">
         NO VIDEO FOR YOU!
-    </video> -->
+    </video>
     <div class="container">
         <div class="row vh-md-100">
             <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
