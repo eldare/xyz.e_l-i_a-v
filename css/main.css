@@ -7374,7 +7374,7 @@ a.text-dark:hover, a.text-dark:focus {
 Custom CSS
 *****************/
 body {
-  background: url("background_with_music.mp4") center center/cover no-repeat;
+  background: url("background.mp4") center center/cover no-repeat;
   border-color: #000000;
 }
 
