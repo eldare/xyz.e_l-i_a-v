@@ -12,6 +12,11 @@ h1 {
   font-family: "Impact", sans-serif;
   font-size: 40px;
 }
+
+.bodyContainer {
+  margin: 20px;
+}
+
 .title-container {
   max-width: 700px;
   margin: 0 auto;
