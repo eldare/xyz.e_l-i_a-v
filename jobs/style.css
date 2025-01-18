@@ -74,7 +74,7 @@ h1 {
   margin: 10px;
   padding: 15px;
   width: 90%;
-  max-width: 600px;
+  max-width: 400px;
   transition: transform 0.2s;
   cursor: pointer;
   position: relative;
@@ -173,6 +173,29 @@ body.dark-mode .job-card {
   color: #eee;
   border-color: #aaa;
 }
+
+header{
+  margin-bottom: 60px;
+  width: 100%;
+  background-color: #007acc;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 20px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+header a,
+header a:visited {
+  color: white;
+  text-decoration: none;
+}
+header a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
 /* Footer styling */
 footer {
   margin-top: 60px;
@@ -183,6 +206,7 @@ footer {
   padding: 10px 0;
   font-size: 20px;
   font-family: "Courier New", Courier, monospace;
+  font-weight: 600;
   letter-spacing: 1px;
 }
 footer a,
@@ -190,6 +214,11 @@ footer a:visited {
   color: white;
   text-decoration: none;
 }
+footer a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
 /* Scroll to Top Button */
 #scrollToTopButton {
   display: none; /* Hidden by default */
@@ -252,9 +281,8 @@ footer a:visited {
 }
 
 img {
-  /* max-width: auto; */
-  width: auto;
-  height: 70px;
+  width: 80%;
+  height: auto;
   margin-bottom: 10px;
 }
 
