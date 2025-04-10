@@ -68,6 +68,17 @@ body {
 [tabindex="-1"]:focus {
   outline: 0 !important; }
 
+.myapp img {
+  transition: transform 0.3s ease-in-out;
+  margin: 10px;
+  width: 50px;
+}
+
+/* Enlarge the image by 25% on hover */
+.myapp:hover img {
+  transform: scale(1.50);
+}
+
 hr {
   box-sizing: content-box;
   height: 0;
